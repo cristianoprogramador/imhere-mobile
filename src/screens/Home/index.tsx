@@ -11,6 +11,8 @@ export function Home() {
 
   function handleParticipantAdd() {
     if (participants.includes(participantName)) {
+      // return console.log("Entrou na condição de que o part. existe", "(participantName)")
+
       return Alert.alert("Participante Existe", "Já existe um participante na lista com esse nome")
     }
 
@@ -18,10 +20,12 @@ export function Home() {
   }
 
   function handleParticipantRemove(name: string) {
+    // return console.log("Nome do usuario => ", name)
+
     Alert.alert('Remover', `Remover o participante ${name}?`, [
       {
         text: 'Sim',
-        onPress: () => Alert.alert("Deletado!")
+        onPress: () => setParticipants(prevState => prevState.filter(participant => participant !== name))
       },
       {
         text: "Não",
@@ -35,11 +39,11 @@ export function Home() {
   return (
     <View style={styles.container} >
       <Text style={styles.eventName}>
-        Introdução ao React.Native
+        Nome do Evento
       </Text>
 
       <Text style={styles.eventDate}>
-        Bem vindo ao curso
+        Lista dos Participantes
       </Text>
 
       <View style={styles.form}>
@@ -48,6 +52,7 @@ export function Home() {
           placeholder="Nome do participante"
           placeholderTextColor="#6b6b6b"
           onChangeText={setParticipantName}
+          value={participantName}
         />
 
         <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
